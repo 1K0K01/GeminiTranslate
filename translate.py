@@ -157,7 +157,7 @@ def translate():
                         cursor: pointer;
                         text-align: center;
                         font-size: 18px;
-                        font-family: 'GowunBatang-Regular', Arial, sans-serif;
+                        font-family: 'S-CoreDream-3Light', Arial, sans-serif;
                         display: inline-block;
                         transition: background-color 0.3s;
                         font-weight: bold;
@@ -210,13 +210,19 @@ def translate():
             <head>
                 <style>
                     @font-face {{
-                        font-family: 'GowunBatang-Regular';
-                        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+                        font-family: 'EF_jejudoldam';
+                        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+                        font-weight: normal;
+                        font-style: normal;
+                    }}
+                    @font-face {{
+                        font-family: 'S-CoreDream-3Light';
+                        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
                         font-weight: normal;
                         font-style: normal;
                     }}
                     body {{
-                        font-family: 'GowunBatang-Regular', Arial, sans-serif;
+                        font-family: 'S-CoreDream-3Light', Arial, sans-serif;
                         background-color: #f7f7f7;
                         margin: 0;
                         padding: 20px;
@@ -235,7 +241,7 @@ def translate():
                         text-align: center;
                     }}
                     h1 {{
-                        font-family: 'GowunBatang-Regular', Arial, sans-serif;
+                        font-family: 'EF_jejudoldam', Arial, sans-serif;
                         margin-bottom: 20px;
                     }}
                     p {{
@@ -253,7 +259,8 @@ def translate():
             </head>
             <body>
                 <div>
-                    <h1>번역 결과 - {model_type}</h1>
+                    <h1>번역 결과</h1>
+                    <p> - {model_type}></p>
                     <p>{translation}</p>
                     <a href="/">다른 글 번역하기</a>
                 </div>

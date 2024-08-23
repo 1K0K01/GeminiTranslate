@@ -292,7 +292,7 @@ def translate():
             <body>
                 <form method="POST" action="/">
                     <h1>번역 결과</h1>
-                    <h2>{model_type}></h2>
+                    <h2>{model_type}</h2>
                     <p>{translation}</p>
                     <a href="/">다른 글 번역하기</a>
                 </form>

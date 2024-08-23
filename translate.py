@@ -84,7 +84,7 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
         },
         generation_config=genai.types.GenerationConfig(
             candidate_count=1,  # 생성된 후보 수
-            temperature=0.4,    # 응답의 다양성 제어
+            temperature=0.5,    # 응답의 다양성 제어
         )
     )
 
@@ -196,7 +196,7 @@ def translate():
                     <h1>깡 번역기</h1>
                     <p class="token-count" id="token_count">Tokens: 0</p>
                     <label for="text">번역할 텍스트:</label>
-                    <textarea id="text" name="text" rows="5" required></textarea>
+                    <textarea id="text" name="text" rows="5" required oninput="updateTokenCount()"></textarea>
                     <label for="source_lang">원본 언어 (예: en):</label>
                     <input type="text" id="source_lang" name="source_lang" value="en" required>
                     <label for="target_lang">번역할 언어 (예: ko):</label>

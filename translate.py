@@ -261,15 +261,26 @@ def translate():
                     a:hover {{
                         color: #0056b3;
                     }}
+                    form {{
+                        background-color: f2f2f2;
+                        padding: 20px;
+                        border-radius: 15px;
+                        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                        width: 100%;
+                        max-width: 600px;
+                        border: 2px solid #333333; 
+                    }}
                 </style>
             </head>
             <body>
+              <form method="POST" action="/">
                 <div>
                     <h1>번역 결과</h1>
                     <h2>{model_type}></h2>
                     <p>{translation}</p>
                     <a href="/">다른 글 번역하기</a>
                 </div>
+              </form>
             </body>
         </html>
         """)

@@ -125,10 +125,10 @@ def translate():
                         border: 2px solid #333333; 
                     }
                     h1 {
-                        font-family: 'EF_jejudoldam', Arial, sans-serif;
+                        font-family: 'EF_jejudoldam',Arial, sans-serif;
                         text-align: center;
-                        font-family: 'GowunBatang-Regular', Arial, sans-serif;
                         margin-bottom: 20px;
+                        display: block;
                     }
                     label {
                         font-family: 'S-CoreDream-3Light', Arial, sans-serif;

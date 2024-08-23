@@ -76,6 +76,11 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
     # Vertex AI API를 사용하여 번역
     response = model.generate_content(prompt)
 
+    # 응답이 차단되었는지 확인
+    if not hasattr(response, 'text') or not response.text:
+        # 안전 평가나 응답 차단 처리
+        raise ValueError("번역 응답이 차단되었습니다. 안전 평가를 확인하세요.")
+        
     # 번역 결과 반환
     return response.text.strip()
 

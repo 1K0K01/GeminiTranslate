@@ -244,10 +244,16 @@ def translate():
                         font-family: 'EF_jejudoldam', Arial, sans-serif;
                         margin-bottom: 20px;
                     }}
+                    h2 {{
+                        font-family: 'S-CoreDream-3Light', Arial, sans-serif;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }}
                     p {{
                         font-size: 18px;
                     }}
                     a {{
+                        font-family: 'S-CoreDream-3Light', Arial, sans-serif;
                         text-decoration: none;
                         color: #007BFF;
                         font-weight: bold;
@@ -260,7 +266,7 @@ def translate():
             <body>
                 <div>
                     <h1>번역 결과</h1>
-                    <p> - {model_type}></p>
+                    <h2>{model_type}></h2>
                     <p>{translation}</p>
                     <a href="/">다른 글 번역하기</a>
                 </div>

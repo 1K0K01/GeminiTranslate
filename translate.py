@@ -100,10 +100,10 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
 @app.route("/", methods=["GET", "POST"])
 def translate():
     # 페이지 공개 여부 확인
-    page_open = os.getenv('PAGE_OPEN', 'false')  # 기본값으로 'false' 설정
-
-    if page_open != 'true':
-        return "현재 이 페이지는 비공개 상태입니다. 나중에 다시 확인하세요.", 403  # 페이지가 닫혀 있으면 비공개 메시지 반환
+    page_open = os.getenv('PAGE_OPEN', 'false')  # 기본값을 'false'로 설정
+ 
+    if page_open == 'false':
+        return "현재 이 페이지는 비공개 상태입니다. 나중에 다시 확인하세요.", 403
 
     if request.method == "GET":
         # 입력 폼 HTML

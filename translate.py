@@ -93,6 +93,12 @@ def translate():
                         font-weight: normal;
                         font-style: normal;
                     }
+                    @font-face {
+                        font-family: 'EF_jejudoldam';
+                        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
                     body {
                         font-family: 'GowunBatang-Regular', Arial, sans-serif;
                         background-color: #f7f7f7;
@@ -113,6 +119,7 @@ def translate():
                         border: 2px solid #333333; 
                     }
                     h1 {
+                        font-family: 'EF_jejudoldam', Arial, sans-serif;
                         text-align: center;
                         font-family: 'GowunBatang-Regular', Arial, sans-serif;
                         margin-bottom: 20px;
@@ -163,7 +170,7 @@ def translate():
             </head>
             <body>
                 <form method="POST" action="/">
-                    <h1>Translator</h1>
+                    <h1>깡 번역기</h1>
                     <p class="token-count" id="token_count">Tokens: 0</p>
                     <label for="text">번역할 텍스트:</label>
                     <textarea id="text" name="text" rows="5" required></textarea>

@@ -60,9 +60,6 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
   2. English (Formal): "Thank you for your cooperation."
    Korean (경어체): "협조해 주셔서 감사합니다."
 
-  3. English (Complex Sentence): "The car jerked forward violently and came to an equally violent stop."
-   Korean: "차가 거칠게 튀어나갔다. 그리고 거칠게 멈췄다."
-
   # 검수 및 퇴고:
   - 맞춤법 검사기를 활용해 문장의 흐름과 정확성을 점검하고, 퇴고를 여러 번 진행하여 자연스러운 표현을 완성하세요.
   

@@ -74,7 +74,19 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
     model = genai.GenerativeModel(model_type)
 
     # Vertex AI API를 사용하여 번역
-    response = model.generate_content(prompt)
+    response = model.generate_content(
+        prompt,
+        safety_settings={
+            "HARM_CATEGORY_HARASSMENT": "block_none",
+            "HARM_CATEGORY_SEXUALLY_EXPLICIT": "block_none",
+            "HARM_CATEGORY_HATE_SPEECH": "block_none",
+            "HARM_CATEGORY_DANGEROUS_CONTENT": "block_none",
+        },
+        generation_config=genai.types.GenerationConfig(
+            candidate_count=1,  # 생성된 후보 수
+            temperature=0.4,    # 응답의 다양성 제어
+        )
+    )
 
     # 응답이 차단되었는지 확인
     if not hasattr(response, 'text') or not response.text:

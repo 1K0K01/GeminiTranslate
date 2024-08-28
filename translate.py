@@ -101,7 +101,9 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
         response = requests.post(
             url,
             json={
-                "prompt": prompt,
+                "input": {  # 수정된 필드 이름
+                    "text": prompt
+                },
                 "generation_config": {
                     "maxOutputTokens": 3000,  # 예시값
                     "temperature": 0.5,

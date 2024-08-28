@@ -68,8 +68,22 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
   
   # Your translation:"""
 
-    # 모델을 동적으로 설정
-    model = genai.GenerativeModel(model_type)
+    # 모델에 따라 엔드포인트 설정
+    if model_type in ["gemini-1.5-pro", "gemini-1.5-flash"]:
+        model_endpoint = model_type
+    elif model_type == "gemini-1.5-pro-exp-0827":
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-exp-0827:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
+    elif model_type == "gemini-1.5-pro-exp-0801":
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-exp-0801:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
+    elif model_type == "gemini-1.5-flash-exp-0827":
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-exp-0827:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
+    elif model_type == "gemini-1.5-flash-8b-exp-0827":
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b-exp-0827:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
+    else:
+        raise ValueError("지원되지 않는 모델 타입입니다.")
+
+    # Google Vertex AI API 호출
+    model = genai.GenerativeModel(model_endpoint)
 
     # Vertex AI API를 사용하여 번역
     response = model.generate_content(
@@ -204,6 +218,10 @@ def translate():
                     <select id="model" name="model">
                         <option value="gemini-1.5-pro">Gemini 1.5 PRO</option>
                         <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                        <option value="gemini-1.5-pro-exp-0827">Gemini 1.5 PRO EXP 0827</option> 
+                        <option value="gemini-1.5-pro-exp-0801">Gemini 1.5 PRO EXP 0801</option> 
+                        <option value="gemini-1.5-flash-exp-0827">Gemini 1.5 Flash EXP 0827</option> 
+                        <option value="gemini-1.5-flash-8b-exp-0827">Gemini 1.5 Flash 8B EXP 0827</option>
                     </select>
                     <input type="submit" value="번역하기">
                 </form>

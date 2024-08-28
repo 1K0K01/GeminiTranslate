@@ -101,14 +101,16 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
         response = requests.post(
             url,
             json={
-                "input": {  # 수정된 필드 이름
-                    "text": prompt
-                },
+                "contents": [{
+                    "role": "USER",  
+                    "parts": [{"text": prompt}]
+                }],
                 "generation_config": {
-                    "maxOutputTokens": 3000,  # 예시값
+                    "max_output_tokens": 3000,  
                     "temperature": 0.5,
+                    "top_p": 0.9,  # 사용된 변수
                 },
-                "safetySettings": [
+                "safety_settings": [  # JSON 필드 이름 수정
                     {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
                     {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
                     {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},

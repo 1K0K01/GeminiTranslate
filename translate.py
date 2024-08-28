@@ -85,28 +85,54 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
     # Google Vertex AI API 호출
     model = genai.GenerativeModel(model_endpoint)
 
-    # Vertex AI API를 사용하여 번역
-    response = model.generate_content(
-        prompt,
-        safety_settings={
-            "HARM_CATEGORY_HARASSMENT": "block_none",
-            "HARM_CATEGORY_SEXUALLY_EXPLICIT": "block_none",
-            "HARM_CATEGORY_HATE_SPEECH": "block_none",
-            "HARM_CATEGORY_DANGEROUS_CONTENT": "block_none",
-        },
-        generation_config=genai.types.GenerationConfig(
-            candidate_count=1,  # 생성된 후보 수
-            temperature=0.5,    # 응답의 다양성 제어
+    # API 호출
+        response = model.generate_content(
+            prompt,
+            safety_settings={
+                "HARM_CATEGORY_HARASSMENT": "block_none",
+                "HARM_CATEGORY_SEXUALLY_EXPLICIT": "block_none",
+                "HARM_CATEGORY_HATE_SPEECH": "block_none",
+                "HARM_CATEGORY_DANGEROUS_CONTENT": "block_none",
+            },
+            generation_config=genai.types.GenerationConfig(
+                candidate_count=1,  # 생성된 후보 수
+                temperature=0.5,    # 응답의 다양성 제어
+            )
         )
-    )
+        # 응답 체크 및 반환
+        if not hasattr(response, 'text') or not response.text:
+            raise ValueError("번역 응답이 차단되었습니다. 안전 설정을 확인하세요.")
 
-    # 응답이 차단되었는지 확인
-    if not hasattr(response, 'text') or not response.text:
-        # 안전 평가나 응답 차단 처리
-        raise ValueError("번역 응답이 차단되었습니다. 안전 평가를 확인하세요.")
+        return response.text.strip()
+
+    else:
+        # 새로운 모델을 위한 직접 API 호출
+        response = requests.post(
+            url,
+            json={
+                "contents": [{"text": prompt}],
+                "generation_config": {
+                    "maxOutputTokens": 1024,  # 예시값
+                    "temperature": 0.5,
+                },
+                "safetySettings": [
+                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
+                ]
+            }
+        )
+
+    # 응답 체크 및 반환
+    if response.status_code != 200:
+        raise ValueError("API 호출 오류: " + response.text)
         
-    # 번역 결과 반환
-    return response.text.strip()
+    data = response.json()
+    if 'candidates' in data and len(data['candidates']) > 0:
+        return data['candidates'][0]['content']['parts'][0]['text'].strip()
+    else:
+        raise ValueError("번역 응답이 없습니다.")
 
 @app.route("/", methods=["GET", "POST"])
 def translate():

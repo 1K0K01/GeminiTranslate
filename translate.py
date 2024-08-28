@@ -125,9 +125,9 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
         )
 
     # 응답 체크 및 반환
-    if response.status_code != 200:
+    if response.status_code != 200:  ###### 수정된 줄
         raise ValueError("API 호출 오류: " + response.text)
-        
+
     data = response.json()
     if 'candidates' in data and len(data['candidates']) > 0:
         return data['candidates'][0]['content']['parts'][0]['text'].strip()

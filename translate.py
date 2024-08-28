@@ -101,9 +101,9 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
         response = requests.post(
             url,
             json={
-                "contents": [{"text": prompt}],
+                "prompt": prompt,
                 "generation_config": {
-                    "maxOutputTokens": 1024,  # 예시값
+                    "maxOutputTokens": 3000,  # 예시값
                     "temperature": 0.5,
                 },
                 "safetySettings": [

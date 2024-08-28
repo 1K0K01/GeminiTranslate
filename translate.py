@@ -1,4 +1,5 @@
 import os
+import requests
 from flask import Flask, request, render_template_string
 import google.generativeai as genai  # Google Vertex AI의 API 사용
 

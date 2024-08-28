@@ -71,21 +71,10 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
     # 모델에 따라 엔드포인트 설정
     if model_type in ["gemini-1.5-pro", "gemini-1.5-flash"]:
         model_endpoint = model_type
-    elif model_type == "gemini-1.5-pro-exp-0827":
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-exp-0827:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
-    elif model_type == "gemini-1.5-pro-exp-0801":
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-exp-0801:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
-    elif model_type == "gemini-1.5-flash-exp-0827":
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-exp-0827:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
-    elif model_type == "gemini-1.5-flash-8b-exp-0827":
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b-exp-0827:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
-    else:
-        raise ValueError("지원되지 않는 모델 타입입니다.")
+        # Google Vertex AI API 호출
+        model = genai.GenerativeModel(model_endpoint)
 
-    # Google Vertex AI API 호출
-    model = genai.GenerativeModel(model_endpoint)
-
-    # API 호출
+        # API 호출
         response = model.generate_content(
             prompt,
             safety_settings={
@@ -99,14 +88,15 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
                 temperature=0.5,    # 응답의 다양성 제어
             )
         )
+
         # 응답 체크 및 반환
         if not hasattr(response, 'text') or not response.text:
             raise ValueError("번역 응답이 차단되었습니다. 안전 설정을 확인하세요.")
-
+        
         return response.text.strip()
 
-    else:
-        # 새로운 모델을 위한 직접 API 호출
+    else:  # 새로운 모델을 위한 직접 API 호출
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_type}:generateContent?key={os.getenv('GOOGLE_API_KEY')}"
         response = requests.post(
             url,
             json={
@@ -124,15 +114,15 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
             }
         )
 
-    # 응답 체크 및 반환
-    if response.status_code != 200:  ###### 수정된 줄
-        raise ValueError("API 호출 오류: " + response.text)
+        # 응답 체크 및 반환
+        if response.status_code != 200:
+            raise ValueError("API 호출 오류: " + response.text)
 
-    data = response.json()
-    if 'candidates' in data and len(data['candidates']) > 0:
-        return data['candidates'][0]['content']['parts'][0]['text'].strip()
-    else:
-        raise ValueError("번역 응답이 없습니다.")
+        data = response.json()
+        if 'candidates' in data and len(data['candidates']) > 0:
+            return data['candidates'][0]['content']['parts'][0]['text'].strip()
+        else:
+            raise ValueError("번역 응답이 없습니다.")
 
 @app.route("/", methods=["GET", "POST"])
 def translate():

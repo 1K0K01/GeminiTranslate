@@ -260,7 +260,7 @@ async def translate():
         model_type = request.form['model']
 
         # 선택한 모델에 따라 Google Vertex AI로 번역 호출
-        translation = await translate_with_vertex_ai_async(text, source_lang, target_lang, model_type)
+        translation = asyncio.run(translate_with_vertex_ai_async(text, source_lang, target_lang, model_type))
 
         return render_template_string(f"""
         <html>

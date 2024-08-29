@@ -2,7 +2,7 @@
 {
   "version": 2,
   "builds": [
-    { "src": "translate.py", "use": "@vercel/python" }
+    { "src": "translate.py", "use": "@vercel/python", "config": { "timeout": 60 } }
   ],
   "routes": [
     { "src": "/(.*)", "dest": "translate.py" }

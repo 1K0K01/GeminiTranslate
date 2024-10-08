@@ -106,7 +106,7 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
                     "parts": [{"text": prompt}]
                 }],
                 "generation_config": {
-                    "max_output_tokens": 8192,  
+                    "max_output_tokens": 8000,  
                     "temperature": 0.5,
                     "top_p": 0.9,  # 사용된 변수
                 },

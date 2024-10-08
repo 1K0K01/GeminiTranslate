@@ -335,47 +335,12 @@ def translate():
                         border: 2px solid #333333; 
                     }}
                 </style>
-                <style>
-                   /* 복사 버튼 스타일 및 위치 조정 */
-                   #copy-btn {
-                       background: none;
-                       border: none;
-                       cursor: pointer;
-                       font-size: 1.5em;
-                       margin-left: 10px;
-                       vertical-align: middle;
-                   }
-                   /* 이모티콘 나란히 배치 */
-                   a, #copy-btn {
-                       display: inline-block;
-                       margin-top: 10px;
-                       font-size: 1.5em;
-                       text-decoration: none;
-                       vertical-align: middle;
-                   }
-                </style>
-                <script>
-                   // 자바스크립트로 복사 기능 구현
-                   function copyTranslation() {
-                       const translationText = document.getElementById('translation-text').innerText;
-                       const tempInput = document.createElement('textarea');
-                       tempInput.value = translationText;
-                       document.body.appendChild(tempInput);
-                       tempInput.select();
-                       document.execCommand('copy');
-                       document.body.removeChild(tempInput);
-                       
-                       alert('번역이 복사되었습니다!');
-                    }
-                </script>
             </head>
             <body>
                 <form method="POST" action="/">
                     <h1>번역 결과</h1>
                     <h2>{model_type}</h2>
                     <p id="translation-text">{translation}</p>
-                    <button type="button" id="copy-btn" onclick="copyTranslation()" title="복사하기">
-                    📋</button>
                     <a href="/" title="다른 글 번역하기">
                     ↩️</a>
                 </form>

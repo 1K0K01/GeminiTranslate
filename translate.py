@@ -237,10 +237,12 @@ def translate():
                         <option value="en">영어 (en)</option>
                         <option value="ja">일어 (ja)</option>
                         <option value="zh">중국어 (zh)</option>
+                        <option value="ko">한국어 (ko)</option>
                     </select>
                     <label for="target_lang">번역할 언어:</label>
                     <select id="target_lang" name="target_lang" required>
-                        <option value="ko" selected>한국어 (ko)</option>
+                        <option value="ko">한국어 (ko)</option>
+                        <option value="en">영어 (en)</option>
                     </select>
                     <label for="model">모델 선택:</label>
                     <select id="model" name="model">

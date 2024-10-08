@@ -239,7 +239,9 @@ def translate():
                         <option value="zh">중국어 (zh)</option>
                     </select>
                     <label for="target_lang">번역할 언어:</label>
-                    <input type="text" id="target_lang" name="target_lang" value="ko" required>
+                    <select id="target_lang" name="target_lang" required>
+                        <option value="ko" selected>한국어 (ko)</option>
+                    </select>
                     <label for="model">모델 선택:</label>
                     <select id="model" name="model">
                         <option value="gemini-1.5-pro">Gemini 1.5 PRO</option>

@@ -106,7 +106,7 @@ def translate_with_vertex_ai(text, source_lang, target_lang, model_type):
                     "parts": [{"text": prompt}]
                 }],
                 "generation_config": {
-                    "max_output_tokens": 3000,  
+                    "max_output_tokens": 8192,  
                     "temperature": 0.5,
                     "top_p": 0.9,  # 사용된 변수
                 },
@@ -239,6 +239,8 @@ def translate():
                     <select id="model" name="model">
                         <option value="gemini-1.5-pro">Gemini 1.5 PRO</option>
                         <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                        <option value="gemini-1.5-pro-002">Gemini 1.5 PRO 002</option>
+                        <option value="gemini-1.5-flash-002">Gemini 1.5 Flash 002</option>
                         <option value="gemini-1.5-pro-exp-0827">Gemini 1.5 PRO EXP 0827</option> 
                         <option value="gemini-1.5-pro-exp-0801">Gemini 1.5 PRO EXP 0801</option> 
                         <option value="gemini-1.5-flash-exp-0827">Gemini 1.5 Flash EXP 0827</option> 
